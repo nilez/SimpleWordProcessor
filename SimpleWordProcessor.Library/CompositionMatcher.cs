@@ -11,7 +11,8 @@ namespace SimpleWordProcessor.Library
     {
         List<string> compositions;
         List<string> parts;
-        Dictionary<string, string> matches = new Dictionary<string, string>();
+
+        Dictionary<string, List<string>> matches = new Dictionary<string, List<string>>();
         int compositionLength;
         public CompositionMatcher(IEnumerable<string> words, int compositionLength)
         {
@@ -23,10 +24,21 @@ namespace SimpleWordProcessor.Library
         }
         public void ProcessEach(string word)
         {
-            string match = compositions.Find(x => x.StartsWith(word) && parts.Contains(x.Substring(word.Length)));
-            if (match != null && !matches.ContainsKey(word))
+            if (word.Length >= compositionLength)
+                return;
+            if (matches.ContainsKey(word))
+                return;
+            var matchList = compositions.FindAll(x => x.StartsWith(word) && parts.Contains(x.Substring(word.Length)));
+
+            foreach (var match in matchList)
             {
-                matches.Add(word, match.Substring(word.Length));
+                if (!matches.ContainsKey(word))
+                {
+                    matches.Add(word, new List<string>() { match.Substring(word.Length) });
+                }
+                else {
+                    matches[word].Add(match.Substring(word.Length));
+                }
             }
         }
 
@@ -36,10 +48,13 @@ namespace SimpleWordProcessor.Library
 
             foreach (var match in matches)
             {
-                console(string.Format("Part 1: {0,15}", match.Key));
-                console(string.Format("Part 2: {0,15}", match.Value));
-                console(string.Format("Composition: {0,10}", match.Key + match.Value));
-                console("-----------------------------------");
+                foreach (var item in match.Value)
+                {
+                    console(string.Format("Part 1: {0,15}", match.Key));
+                    console(string.Format("Part 2: {0,15}", item));
+                    console(string.Format("Composition: {0,10}", match.Key+ item));
+                    console("-----------------------------------");
+                }                
             }
         }
     }

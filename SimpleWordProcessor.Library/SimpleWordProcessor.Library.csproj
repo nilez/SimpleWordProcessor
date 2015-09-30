@@ -7,8 +7,8 @@
     <ProjectGuid>{C6F27AA4-FC2E-4DF6-AB11-688B40C0BDBD}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>SimpleWordProcessor.Lib</RootNamespace>
-    <AssemblyName>SimpleWordProcessor.Lib</AssemblyName>
+    <RootNamespace>SimpleWordProcessor.Library</RootNamespace>
+    <AssemblyName>SimpleWordProcessor.Library</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -40,7 +40,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CompositionEntry.cs" />
     <Compile Include="CompositionMatcher.cs" />
+    <Compile Include="CounterEntry.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="StandardTraversercs.cs" />
     <Compile Include="WordsCounter.cs" />

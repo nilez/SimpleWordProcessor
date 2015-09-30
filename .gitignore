@@ -1,3 +1,7 @@
 SimpleWordProcessor.Client/bin/
 SimpleWordProcessor.Client/obj/
 SimpleWordProcessor.Core/obj/
+SimpleWordProcessor.Tests/obj/
+SimpleWordProcessor.Library/obj/
+packages/
+SimpleWordProcessor.Tests/bin/

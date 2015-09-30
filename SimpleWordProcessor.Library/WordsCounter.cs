@@ -2,32 +2,41 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimpleWordProcessor.Library
 {
     public class WordsCounter : IWordProcessor
     {
-        Dictionary<string, int> appearances = new Dictionary<string, int>();
+        readonly List<CounterEntry> appearances = new List<CounterEntry>();
+
         const string ConsoleFormat = "{0,15}{1,10}";
         public void ProcessEach(string word)
         {
-            if (appearances.ContainsKey(word))
-                appearances[word] += 1;
+            CounterEntry match = appearances.Find(c => c.Word == word);
+
+            if (match != null)
+                match.Count++;
             else
-                appearances.Add(word, 1);
+                appearances.Add(new CounterEntry() { Word = word, Count = 1 });
         }
 
         public void ReportTo(Action<string> console)
         {
             console("Repoting From WordsCounter:    ");
-            console(string.Format(ConsoleFormat, "Word","Count"));
+            console(string.Format(ConsoleFormat, "Word", "Count"));
             console(Environment.NewLine);
-            foreach (var entry in appearances.OrderBy(x=>x.Key))
-            {                
-                console(string.Format(ConsoleFormat, entry.Key, entry.Value));
+            foreach (var entry in appearances.OrderBy(c => c.Word))
+            {
+                console(string.Format(ConsoleFormat, entry.Word, entry.Count));
             }
         }
-    }
+
+        public IEnumerable<CounterEntry> Appearances
+        {
+            get
+            {
+                return appearances;
+            }
+        }
+    }   
 }

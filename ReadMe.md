@@ -1,10 +1,10 @@
 # Simple Word Processor
 
-#Assumptions:
+## Assumptions:
 * Output format mentioned in the problem is not strict.
 * I have taken liberty to consider composition length 6, given in problem as variable.
 	
-#Design and Considerations:
+## Design and Considerations:
 * SimpleWordProcessor.Core project contains the abstractions.
 * SimpleWordProcessor.Library project contains the implementation.
 * SimpleWordProcessor.Client project contains the console client.	
